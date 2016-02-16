@@ -1,0 +1,21 @@
+{
+	"name": "neuron-camera",
+	"version": "0.8.0",
+	"homepage": "https://github.com/partnering/neuron-video-rtc",
+	"description": "video streaming through RTC",
+	"authors": [
+		"Jerome Fellus <jerome.fellus@partnering.fr>"
+	],
+	"main": "neuron-camera.html",
+	"license": "LGPL v3",
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	],
+	"dependencies": {
+		"polymer": "Polymer/polymer"
+	}
+}

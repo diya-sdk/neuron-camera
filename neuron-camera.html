@@ -1,0 +1,32 @@
+<dom-module id="neuron-camera">
+  <style>
+	  :host{
+		  display: flex;
+	  }
+	  #videostream{
+		  flex: 1;
+		  display: flex;
+		  align-items: center;
+		  flex-direction: column;
+		  justify-content: center;
+	  }
+	  #buttons{
+		  flex: 1;
+		  display: flex;
+		  align-items: center;
+		  justify-content: center;
+	  }
+	</style>
+  <template>
+
+	<div id="videostream">
+	  <video id="basicStream" class="videostream" width="{{width}}" height="{{height}}" autoplay="" style="display:none;"></video>
+      <canvas id="c1" width="{{width}}" height="{{height}}" style="display:none;"/>
+	</div>
+	<div id="buttons">
+	  <button on-tap="startVideo">Capture video</button>
+	  <button on-tap="stopVideo">Stop</button>
+	</div>
+  </template>
+</dom-module>
+<script src="neuron-camera.js"> </script>
