@@ -1,0 +1,32 @@
+<html>
+<head>
+	<script src="/bower_components/webcomponentsjs/webcomponents.min.js"></script>
+	<link rel="import" href="./neuron-camera.html">
+	<link rel="import" href="/bower_components/neuron-container/neuron-container.html">
+	<link rel="import" href="/bower_components/polymer/polymer.html">
+	<link rel="import" href="/bower_components/diya-sdk/src/diya-sdk.html">
+</head>
+<body>
+
+<neuron-container id="container" selector="" >
+	<neuron-camera name="macam" width=320 height=240></neuron-camera>
+</neuron-container>
+
+<script>
+
+	window.addEventListener("load", function() {
+
+	d1.connect("wss://192.168.1.136/api").catch(function(e){ console.error(e); });
+	d1.on("peer-connected", function(peerId){
+		console.log(peerId);
+		d1(peerId).auth("admin","pass").then(function(){
+			console.log("connected to " + peerId);
+			document.querySelector("neuron-container").setAttribute("selector", peerId);
+		});
+	});
+
+});
+
+</script>
+</body>
+</html>

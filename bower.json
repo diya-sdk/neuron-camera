@@ -16,6 +16,7 @@
 		"tests"
 	],
 	"dependencies": {
-		"polymer": "Polymer/polymer"
+		"polymer": "Polymer/polymer",
+		"neuron-container": "partnering/neuron-container#master"
 	}
 }

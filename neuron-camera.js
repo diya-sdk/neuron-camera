@@ -1,47 +1,54 @@
+//////////////
+// POLYFILL //
+//////////////
+
+if(!navigator.getUserMedia && navigator.webkitGetUserMedia) {
+	navigator.getUserMedia = function(opt, callback, errorCallback ) {
+		return navigator.webkitGetUserMedia(opt, function (stream) {
+			callback(stream);
+		}, errorCallback);
+	};
+}
+
+navigator.getUserMedia = ( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+
+
+
+///////////////////
+
+
+function doStart() {
+	document.querySelector("neuron-camera").start();
+}
+
 Polymer({
 	is: 'neuron-camera',
 	properties: {
-		height: { notify: true },
-		width: { notify: true }
+		width: { notify: true, value:320 },
+		height: { notify: true, value:240 }
 	},
 	ready: function () {
 		var that = this;
-		this.width = 320;
-		this.height = 240;
-		this.incr = 1;
-		this.video = this.$.basicStream;
-		this.ctx1 = this.$.c1.getContext("2d");
-		this.localMediaStream = null;
-		this.imgId  = 0;
-		this.rtcSizeMax = 16000;
-		this.sizeImg = this.width * this.height;
-		this.nbChunks = Math.ceil((this.sizeImg) /this.rtcSizeMax);
-		this.sizeLastChunk = (this.sizeImg) % this.rtcSizeMax;
+		this.video = this.$.camera;
 	},
 
-	startVideo: function () {
+	start: function () {
 		var that = this;
-		if (navigator.getUserMedia) {
-			navigator.getUserMedia('video', function (stream) {
-				that.video.src = stream;
-				that.video.controls = true;
-				// that.video.maxWidth = 240;
-				// that.video.maxHeight = 180;
-				that.localMediaStream = stream;
-			}, errorCallback);
-		} else if (navigator.webkitGetUserMedia) {
-			navigator.webkitGetUserMedia({ video: true }, function (stream) {
-				that.video.src = window.URL.createObjectURL(stream);
-				that.video.controls = true;
-				// that.video.maxWidth = 240;
-				// that.video.maxHeight = 180;
-				that.localMediaStream = stream;
-			}, errorCallback);
-		} else {
-			errorCallback({ target: that.video });
-		}
+		navigator.getUserMedia({video:{
+			mandatory:{
+				minWidth:this.width,minHeight:this.height,
+				maxWidth:this.width,maxHeight:this.height
+				//minFrameRate:1,maxFrameRate:1
+			}
+		}}, function (stream) {
+			that.fire("stream", {stream:stream}); // Notify the underlying diya-sdk RTC channel that a new stream is available
+			that.video.src = window.URL.createObjectURL(stream);
+			that.video.controls = true;
+			that.localMediaStream = stream;
+		}, errorCallback);
 	},
-	stopVideo: function () {
+
+	stop: function () {
 		this.video.pause();
 		this.localMediaStream.stop();  // Doesn't do anything in Chrome.
 	}
