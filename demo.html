@@ -9,14 +9,14 @@
 <body>
 
 <neuron-container id="container" selector="" >
-	<neuron-camera name="macam" width=320 height=240></neuron-camera>
+	<neuron-camera name="macam" width=640 height=480></neuron-camera>
 </neuron-container>
 
 <script>
 
 	window.addEventListener("load", function() {
 
-	d1.connect("wss://192.168.1.136/api").catch(function(e){ console.error(e); });
+	d1.connect("wss://"+document.location.hostname+"/api").catch(function(e){ console.error(e); });
 	d1.on("peer-connected", function(peerId){
 		console.log(peerId);
 		d1(peerId).auth("admin","pass").then(function(){
