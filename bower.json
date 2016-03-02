@@ -17,6 +17,8 @@
 	],
 	"dependencies": {
 		"polymer": "Polymer/polymer",
-		"neuron-container": "partnering/neuron-container#master"
+		"neuron-container": "partnering/neuron-container#master",
+		"neuron-label": "partnering/neuron-label#master",
+		"neuron-base": "partnering/neuron-base#master"
 	}
 }

@@ -2,14 +2,16 @@
 <head>
 	<script src="/bower_components/webcomponentsjs/webcomponents.min.js"></script>
 	<link rel="import" href="./neuron-camera.html">
-	<link rel="import" href="/bower_components/neuron-container/neuron-container.html">
-	<link rel="import" href="/bower_components/polymer/polymer.html">
-	<link rel="import" href="/bower_components/diya-sdk/src/diya-sdk.html">
+	<link rel="import" href="./bower_components/neuron-container/neuron-container.html">
+	<link rel="import" href="./bower_components/neuron-label/neuron-label.html">
+	<link rel="import" href="./bower_components/polymer/polymer.html">
+	<link rel="import" href="./bower_components/diya-sdk/src/diya-sdk.html">
 </head>
 <body>
 
 <neuron-container id="container" selector="" >
 	<neuron-camera name="macam" width=640 height=480></neuron-camera>
+	<div>Datachannel = 	<neuron-label name="datachannel"></neuron-label></div>
 </neuron-container>
 
 <script>
@@ -23,6 +25,10 @@
 			console.log("connected to " + peerId);
 			document.querySelector("neuron-container").setAttribute("selector", peerId);
 		});
+	});
+
+	document.querySelector("neuron-label").addEventListener("value", function(values) {
+		console.log(values);
 	});
 
 });
