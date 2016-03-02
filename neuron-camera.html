@@ -3,30 +3,37 @@
 <dom-module id="neuron-camera">
   <style>
 	  :host{
-		  display: flex;
-	  }
+		  display:block;
+  		}
+
 	  #videostream{
-		  flex: 1;
-		  display: flex;
-		  align-items: center;
-		  flex-direction: column;
-		  justify-content: center;
+		  display:block; width:100%; height:auto;
 	  }
 	  #buttons{
-		  flex: 1;
 		  display: flex;
 		  align-items: center;
 		  justify-content: center;
 	  }
+
+	  :host:not([video='true']) #videostream {
+		  display:none;
+	  }
+
+	  :host:not([controls='true']) #controls { display:none; }
+
+	  video {
+		  width:100%; height:auto;
+	  }
+
 	</style>
   <template>
-	  <button onclick="doStart()">DO START</button>
+	  <div id="controls">
 	  <button on-tap="start">Start</button>
 	  <button on-tap="stop">Stop</button>
+  	</div>
+  </div>
 	<div id="videostream">
 	  <video id="camera" class="videostream" width="{{width}}" height="{{height}}" autoplay=""></video>
-	</div>
-	<div id="buttons">
 	</div>
   </template>
 </dom-module>

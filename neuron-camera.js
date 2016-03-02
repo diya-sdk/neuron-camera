@@ -17,10 +17,6 @@ navigator.getUserMedia = ( navigator.getUserMedia || navigator.webkitGetUserMedi
 ///////////////////
 
 
-function doStart() {
-	document.querySelector("neuron-camera").start();
-}
-
 Polymer({
 	is: 'neuron-camera',
 	properties: {
