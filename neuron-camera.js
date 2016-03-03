@@ -47,14 +47,14 @@ Polymer({
 	stop: function () {
 		this.video.pause();
 		if(this.localMediaStream && this.localMediaStream.stop) this.localMediaStream.stop();  // Doesn't do anything in Chrome.
-		that.video.src = "";
+		this.video.src = "";
 	}
 });
 
 
 function errorCallback(e) {
 	if (e.code == 1) {
-		alert('User denied access to their camera');
+		alert('User denied access to camera');
 	} else {
 		alert('getUserMedia() not supported in your browser.');
 	}
