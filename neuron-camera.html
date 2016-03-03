@@ -7,7 +7,8 @@
   		}
 
 	  #videostream{
-		  display:block; width:100%; height:auto;
+		  display:block; width:100%; height:auto; background: black; border:1px solid #eeeeee;
+		  border-radius:10px;
 	  }
 	  #buttons{
 		  display: flex;
@@ -22,8 +23,19 @@
 	  :host:not([controls='true']) #controls { display:none; }
 
 	  video {
-		  width:100%; height:auto;
+		  width: 100%;
+		  height: auto;
+		  margin: 0;
+		  padding: 0;
+		  display: block;
+		  border-radius: 10px;
+		  border: 1px solid black;
+		  box-sizing: border-box;
 	  }
+	  
+	  video::-webkit-media-controls {display: none !important;}
+	  video /deep/ -webkit-media-controls {display: none !important;}
+
 
 	</style>
   <template>
@@ -33,7 +45,7 @@
   	</div>
   </div>
 	<div id="videostream">
-	  <video id="camera" class="videostream" width="{{width}}" height="{{height}}" autoplay=""></video>
+	  <video id="camera" class="videostream"  width="{{width}}" height="{{height}}" autoplay="autoplay"></video>
 	</div>
   </template>
 </dom-module>

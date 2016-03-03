@@ -46,7 +46,8 @@ Polymer({
 
 	stop: function () {
 		this.video.pause();
-		this.localMediaStream.stop();  // Doesn't do anything in Chrome.
+		if(this.localMediaStream && this.localMediaStream.stop) this.localMediaStream.stop();  // Doesn't do anything in Chrome.
+		that.video.src = "";
 	}
 });
 
